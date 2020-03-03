@@ -1,0 +1,41 @@
+{% load static %}
+<html lang="en">
+<head>
+    <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ToDo App</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'bs/css/bootstrap.css' %}" />
+        
+		<link rel="stylesheet" href="{% static 'bs/css/flatly.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'styles.css' %}" />
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+</head>
+<body>
+    
+   
+    
+    {% block content %}
+    {% endblock %}
+    
+    {% include 'partials/_footer.html' %}
+
+    <!-- jQuery -->
+    <!-- Bootstrap JavaScript -->
+    <script src="{% static 'bs/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bs/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'bs/js/main.js' %}"></script>
+</body>
+</html>

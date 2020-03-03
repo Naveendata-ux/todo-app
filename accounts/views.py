@@ -3,7 +3,6 @@ from django.contrib import messages,auth
 from django.contrib.auth.models import User
 
 
-
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
