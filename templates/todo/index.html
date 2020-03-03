@@ -1,12 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% include 'partials/_alerts.html' %}
 	<div class="container-fluid" id="wrapper">
 		<div class="row">
-			<div class="col-md-12" style="text-align: center;">
-				<a  href="{% url 'accounts:register' %}" class="btn btn-primary">Register</a>
-				<a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
-			</div>
+			{% if user.is_authenticated %}
+				<div class="col-md-12" style="text-align: center;">
+					Welcome ,<strong>{{ user.first_name}}</strong>
+					<a href="javascript:{document.getElementById('logout').submit()}" 
+						class="btn btn-primary">Logout</a>
+					<form action="{% url 'accounts:logout' %}" method="POST" id="logout">
+						{%csrf_token%}	
+						<input type="hidden">
+					</form>
+				</div>
+			{% else %}
+				<div class="col-md-12" style="text-align: center;">
+					<a  href="{% url 'accounts:register' %}" class="btn btn-primary">Register</a>
+					<a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+				</div>
+			{% endif %}
+			
 		</div>
 			<div class="row">
 				<div class="col-lg-4 col-lg-offset-4" id="content">
@@ -45,6 +59,7 @@
 							</div>
 						</div>
 					</div>
+
 
 					<ul class="list-group t20">
 						{% for todo in todo_list %}

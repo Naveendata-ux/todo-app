@@ -44,11 +44,17 @@ def login(request):
         user = auth.authenticate(request,username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            messages.error(request,'you are now logged in') 
+            messages.success(request,'you are now logged in') 
             return redirect('todo:index')
         else:
             messages.error(request,'invalid username or password') 
             return redirect('accounts:login')
 
     return render(request,'accounts/login.html')
+
+def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request,'you are now logged out')
+        return redirect('todo:index')
 
