@@ -9,4 +9,5 @@ urlpatterns = [
     path('complete/<int:todo_id>',views.completedTodo,name='complete'),
     path('deleteCompleted',views.deleteCompletedTodo,name='deleteCompleted'),
     path('deleteAll',views.deleteAll,name='deleteAll'),
+    path('search',views.search,name='search'),
 ]

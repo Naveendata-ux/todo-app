@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST,require_GET
 from .models import Todo
 from .forms import TodoForm
 from django.contrib.auth.decorators import login_required
@@ -7,11 +7,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     
     todo_list=Todo.objects.order_by('id').filter(user_id=request.user.id)
-    form =TodoForm()
+    formTodo =TodoForm()
 
     context={
         'todo_list':todo_list,
-        'form':form
+        'form':formTodo
     }
     return render(request,'todo/index.html',context)
 
@@ -37,6 +37,24 @@ def deleteCompletedTodo(request):
 def deleteAll(request):
     Todo.objects.all().filter(user_id=request.user.id).delete()
     return redirect('todo:index')
+
+@login_required
+def search(request):
+    queryset_list = Todo.objects.order_by('id').filter(user_id=request.user.id)
+
+    if 'todo-txt' in request.GET:
+        text = request.GET['todo-txt']
+        if text:
+            queryset_list=queryset_list.all().filter(text__icontains=text)
+
+        formTodo=TodoForm()
+
+    context={
+        'todo_list':queryset_list,
+        'form':formTodo
+    }
+            
+    return render(request,'todo/index.html',context)
 
 
 
